@@ -20,7 +20,11 @@ class DoingRepositry private constructor(context: Context){
     fun getDoing(): LiveData<List<To_DoList>> = to_DoListDao.getDoing()
     fun getTo_DoList(id: UUID): LiveData<To_DoList?> = to_DoListDao.getTo_DoList(id)
     private val executor = Executors.newSingleThreadExecutor()
-
+    fun updateTo_DoList(doing: To_DoList) {
+        executor.execute {
+            to_DoListDao.updateTo_DoList(doing)
+        }
+    }
     fun addTo_DoList(to_DoList: To_DoList) {
         executor.execute {
             to_DoListDao.addTo_DoList(to_DoList )

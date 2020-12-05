@@ -24,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
 class SecondFragment : Fragment() {
     private lateinit var doingRecyclerView1: RecyclerView
     private var adapter1: DoingAdapter? = null
-    var toDolist: To_DoList? = null
+    private lateinit var toDolist: To_DoList
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -79,6 +79,7 @@ class SecondFragment : Fragment() {
 
         override fun onClick(v: View?) {
             this.toDolist.status=2
+            doingListViewModel.updateTo_DoList(this.toDolist)
             doingListViewModel.ProgressList.observe(
                 viewLifecycleOwner,
                 Observer { to_DoLists ->

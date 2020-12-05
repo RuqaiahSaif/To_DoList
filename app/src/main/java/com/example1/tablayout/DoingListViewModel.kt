@@ -10,4 +10,7 @@ class DoingListViewModel: ViewModel() {
     fun addTo_DoList(to_DoList: To_DoList) {
         doingRepositry.addTo_DoList(to_DoList)
     }
+    fun updateTo_DoList(to_DoList: To_DoList) {
+        doingRepositry.updateTo_DoList(to_DoList)
+    }
 }

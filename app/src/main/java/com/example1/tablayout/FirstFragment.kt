@@ -4,12 +4,14 @@ import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Math.abs
 import java.text.DateFormat
 import java.util.*
 
@@ -70,6 +72,7 @@ class FirstFragment : Fragment(),NewDialog.Callbacks {
         val titleTextView: TextView = itemView.findViewById(R.id.title)
         val detailsTextView: TextView = itemView.findViewById(R.id.details)
         val dateTextView: TextView = itemView.findViewById(R.id.date)
+        val block:LinearLayout=itemView.findViewById(R.id.block)
         val enter: Button = itemView.findViewById(R.id.enter)
 
         init {
@@ -82,12 +85,17 @@ class FirstFragment : Fragment(),NewDialog.Callbacks {
             titleTextView.text = this.toDolist.title
             detailsTextView.text = this.toDolist.details
             dateTextView.text=this.toDolist.date.toString()
-
+            var date:Date= Date()
+           var def= abs(date.time - this.toDolist.date.time)
+            if(def>=3){
+                block.setBackgroundResource(R.color.colorPrimary)
+            }
 
         }
 
         override fun onClick(v: View?) {
             this.toDolist.status=1
+            doingListViewModel.updateTo_DoList(this.toDolist)
             doingListViewModel.doingList.observe(
                 viewLifecycleOwner,
                 Observer { to_DoLists ->

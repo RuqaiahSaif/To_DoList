@@ -80,6 +80,7 @@ class ThirdFragment : Fragment() {
 
         override fun onClick(v: View?) {
             this.toDolist.status=0
+            doingListViewModel.updateTo_DoList(this.toDolist)
             doingListViewModel.doingList.observe(
                 viewLifecycleOwner,
                 Observer { to_DoLists ->
